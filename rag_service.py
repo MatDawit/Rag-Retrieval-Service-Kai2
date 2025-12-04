@@ -48,13 +48,15 @@ def auth(x_api_key: Optional[str]):
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 
+HEALTH_VERSION = "health-head-v3"
+
 @app.get("/health")
 def health():
-    # Keep this super light for monitoring
     return {
         "ok": True,
         "embed_model": EMBED_MODEL,
         "milvus_collection": MILVUS_COLLECTION,
+        "version": HEALTH_VERSION,
     }
 
 
