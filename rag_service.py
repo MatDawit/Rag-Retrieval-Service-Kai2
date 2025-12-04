@@ -1,7 +1,7 @@
 import os
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, Header, HTTPException, Response
 from pydantic import BaseModel
 
 from fastembed import TextEmbedding
@@ -58,6 +58,11 @@ def health():
         "milvus_collection": MILVUS_COLLECTION,
         "version": HEALTH_VERSION,
     }
+
+@app.head("/health", include_in_schema=False)
+def health_head():
+    return Response(status_code=200)
+
 
 
 @app.post("/search")
