@@ -58,6 +58,11 @@ def health():
     }
 
 
+@app.head("/health")
+def health_head():
+    return Response(status_code=200)
+
+
 @app.post("/search")
 def search(req: SearchReq, x_api_key: Optional[str] = Header(default=None)):
     auth(x_api_key)
